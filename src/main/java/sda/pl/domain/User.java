@@ -1,4 +1,44 @@
 package sda.pl.domain;
 
-public class User {
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Set;
+
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode(exclude = {"OrderSet","cartSet","ProductRatingSet"})
+public class User implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String firstName;
+    String lastName;
+    String email;
+    String zipcode;
+    String cityName;
+    String street;
+    String password;
+
+    @OneToMany(mappedBy = "user")
+    Set<Order> orderSet;
+    @OneToMany(mappedBy = "user")
+    Set<Cart> cartSet;
+    @OneToMany(mappedBy = "user")
+    Set<ProductRating> productRatingSet;
+
+    @Transient
+    BigDecimal totalOrderPrice;
+
+    public User(Long id, String email, BigDecimal totalOrderPrice){
+        this.id = id;
+        this.email = email;
+        this.totalOrderPrice = totalOrderPrice;
+
+    }
 }

@@ -1,5 +1,7 @@
-package sda.pl.warehouse;
+package sda.pl.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
@@ -9,32 +11,22 @@ import sda.pl.WarehouseName;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Embeddable
+@Builder
+
 public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Enumerated
     WarehouseName warehouseName;
-    Long ammount;
-
+    BigDecimal amount;
+    @JoinColumn
     @ManyToOne
     Product product;
-
-    public static void addProduct(Product product, WarehouseName name){
-    Session session = null;
-    try {
-        session = HibernateUtil.openSession();
-
-        } catch (Exception e) {
-        e.printStackTrace();
-    }finally {
-        if (session != null && session.isOpen()) {
-            session.close();
-        }
-    }
-    }
 }
