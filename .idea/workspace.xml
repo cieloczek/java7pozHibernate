@@ -1,36 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2a3b7045-7b33-4993-9f98-ab1da472183a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/.gitignore" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/Color.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/Price.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/WarehouseName.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/Cart.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/CartDetail.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/Order.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/OrderDetails.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/ProductImage.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/ProductRating.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/Stock.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/domain/User.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/repository/OrderRepository.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/repository/ProductRepository.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/repository/UserRepository.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/sda/pl/repository/ProductRepositoryTest.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/sda/pl/repository/UserRepositoryTest.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="2a3b7045-7b33-4993-9f98-ab1da472183a" name="Default" comment="initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/hibernatesda.iml" afterPath="$PROJECT_DIR$/hibernatesda.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sda/pl/App.java" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/App.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sda/pl/Product.java" afterPath="$PROJECT_DIR$/src/main/java/sda/pl/Product.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sda/pl/App.class" afterPath="$PROJECT_DIR$/target/classes/sda/pl/App.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sda/pl/HibernateUtil.class" afterPath="$PROJECT_DIR$/target/classes/sda/pl/HibernateUtil.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sda/pl/Product.class" afterPath="$PROJECT_DIR$/target/classes/sda/pl/Product.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -320,6 +292,32 @@
               <item name="java7pozHibernate" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java7pozHibernate" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java7pozHibernate" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pl" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java7pozHibernate" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java7pozHibernate" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pl" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java7pozHibernate" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java7pozHibernate" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -595,7 +593,7 @@
       <workItem from="1527179396140" duration="6372000" />
       <workItem from="1527263171778" duration="7406000" />
       <workItem from="1527518294465" duration="10130000" />
-      <workItem from="1527604998951" duration="2418000" />
+      <workItem from="1527604998951" duration="2581000" />
     </task>
     <servers />
   </component>
@@ -632,7 +630,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27625000" />
+    <option name="totallyTimeSpent" value="27788000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
