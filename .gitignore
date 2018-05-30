@@ -84,4 +84,4 @@ buildNumber.properties
 hs_err_pid*
 
 #XMLEditor
-*.*xml~
+*.*xml
