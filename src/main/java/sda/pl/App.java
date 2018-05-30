@@ -1,5 +1,6 @@
 package sda.pl;
 
+import sda.pl.domain.Cart;
 import sda.pl.domain.Order;
 import sda.pl.domain.OrderDetails;
 import sda.pl.domain.User;

@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table
 
 public class Stock implements Serializable {
     @Id

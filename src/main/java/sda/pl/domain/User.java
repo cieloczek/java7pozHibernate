@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(exclude = {"OrderSet","cartSet","ProductRatingSet"})
+@EqualsAndHashCode(exclude = {"orderSet","cartSet","productRatingSet"})
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class User implements Serializable{
 
     @OneToMany(mappedBy = "user")
     Set<Order> orderSet;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     Set<Cart> cartSet;
     @OneToMany(mappedBy = "user")
     Set<ProductRating> productRatingSet;

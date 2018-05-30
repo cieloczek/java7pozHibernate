@@ -1,6 +1,7 @@
 package sda.pl.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import sda.pl.Price;
@@ -9,8 +10,9 @@ import sda.pl.Product;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
 @Data
+@Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartDetail implements Serializable{
@@ -20,7 +22,7 @@ public class CartDetail implements Serializable{
     @ManyToOne
     @JoinColumn
     Product product;
-    Long ammount;
+    Long amount;
     @Embedded
     Price price;
     @ManyToOne

@@ -5,7 +5,7 @@ import org.hibernate.query.Query;
 import sda.pl.Color;
 import sda.pl.HibernateUtil;
 import sda.pl.Product;
-import sun.plugin2.main.client.ProcessUI;
+import sda.pl.WarehouseName;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -152,5 +152,30 @@ public class ProductRepository {
                 }
             }
         }
+
+        //Works because of Hibernates Dirty Checking
+        public static boolean findProductWithMagic(Long id){
+        Session session = null;
+
+        try {
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            Product product = session.find(Product.class, id);
+            product.addStock(WarehouseName.MAIN, new BigDecimal(30));
+            product.setName(product.getName()+" ++");
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (session != null && session.isOpen() && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
+            return false;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
     }
 
