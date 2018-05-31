@@ -42,16 +42,37 @@ public class Product {
 
 
     public void addStock(WarehouseName name, BigDecimal amount){
-        Stock stock = new Stock();
-        stock.setProduct(this);
-        stock.setWarehouseName(name);
-        stock.setAmount(amount);
         if(stockSet==null){
             stockSet = new HashSet<>();
-            stockSet.add(stock);
         }
+        Optional<Stock> stockExits= stockSet.stream().filter(e->e.getWarehouseName().equals(name)).findFirst();
+        if(!stockExits.isPresent()) {
+            Stock stock = new Stock();
+            stock.setProduct(this);
+            stock.setWarehouseName(name);
+            stock.setAmount(amount);
+            stockSet.add(stock);
+        }else{
+        stockExits.ifPresent(e->e.setAmount(e.getAmount().add(amount)));        }
+
         Optional<Stock> stockExist = stockSet.stream().filter(e->e.getWarehouseName().equals(name)).findFirst();
         stockExist.ifPresent(s->s.setAmount(s.getAmount().add(amount)));
+    }
+
+    public long getSumStockForSale() {
+        return getStockSet()
+                .stream()
+                .filter(s->!s
+                .getWarehouseName()
+                .equals(this))
+                .mapToLong(s->s.getAmount().longValue()).sum();
+    }
+    public void addProductRating(ProductRating productRating){
+        if(productRatingSet==null){
+            productRatingSet = new HashSet<>();
+        }
+        productRating.setProduct(this);
+        productRatingSet.add(productRating);
     }
 }
 
