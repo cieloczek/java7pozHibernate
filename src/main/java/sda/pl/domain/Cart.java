@@ -1,7 +1,6 @@
 package sda.pl.domain;
 
 import lombok.*;
-import sda.pl.Product;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode(exclude = "cartDetailSet")
+@EqualsAndHashCode(exclude = {"cartDetailSet", "user"})
 public class Cart implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,8 @@ public class Cart implements Serializable{
     @ManyToOne
     @JoinColumn
     User user;
-
+    @Transient
+    boolean valid;
     @OneToMany(mappedBy = "cart",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     Set<CartDetail> cartDetailSet;
 
@@ -39,6 +39,7 @@ public class Cart implements Serializable{
                                 .equals(product
                                         .getId()))
                 .findFirst();
+        long sum = product.getSumStockForSale();
         if(!first.isPresent()){
             CartDetail newCartDetail = CartDetail.builder()
                     .amount(amount)
@@ -47,6 +48,10 @@ public class Cart implements Serializable{
                     .product(product)
                     .build();
             cartDetailSet.add(newCartDetail);
+        }else{
+            CartDetail cd = first.get();
+            if(cd.getAmount()+amount>sum);
+
         }
     }
     public void substractProductInCart(Product product) {
@@ -68,17 +73,37 @@ public class Cart implements Serializable{
         if(cartDetailSet == null){
             return;
         }
+        long sum = product.getSumStockForSale();
         Optional<CartDetail> productInCart = cartDetailSet.stream().filter(cd->cd.getId().equals(product.getId())).findFirst();
         productInCart.ifPresent(pr->{
             if(amount>0){
-                pr.setAmount(amount);
+                if(amount>sum) {
+                    pr.setAmount(sum);
+                }else{
+                    pr.setAmount(amount);
+                }
             }else{
                 pr.setAmount(0L);
             }
         });
        }
-
-       public Order createNewOrder(){
+    public void checkIfValid(){
+        setValid(true);
+        getCartDetailSet().forEach(cd->{
+            long sumStockForSale = cd.getProduct().getSumStockForSale();
+            if(sumStockForSale<cd.getAmount()){
+                setValid(false);
+            }
+        });
+    }
+    public void setValid(boolean valid){
+        this.valid =valid;
+    }
+    public Order createNewOrder() throws ShopException{
+        checkIfValid();
+        if(!valid){
+            throw new ShopException("Some products are missing in stock");
+        }
         Order order = Order.builder()
                 .cityname(this.getUser().cityName)
                 .date(LocalDateTime.now())
@@ -86,8 +111,12 @@ public class Cart implements Serializable{
                 .RODO(true)
                 .build();
         this.cartDetailSet.forEach(e->
-order.addOrderDetail(new OrderDetails(e)));
+                order.addOrderDetail(new OrderDetails(e)));
                 order.calculateTotalPrice();
         return order;
        }
+
+
+
+
 }

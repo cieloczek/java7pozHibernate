@@ -1,13 +1,12 @@
 package sda.pl;
 
-import org.junit.Assert;
 import org.junit.Test;
+import sda.pl.domain.Product;
+import sda.pl.domain.WarehouseName;
 import sda.pl.repository.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 public class ProductTest {
 

@@ -1,4 +1,4 @@
-package sda.pl;
+package sda.pl.domain;
 
 public enum WarehouseName {
     MAIN, WEB,COMPLAINT

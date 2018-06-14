@@ -2,10 +2,10 @@ package sda.pl.repository;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import sda.pl.Color;
+import sda.pl.domain.Color;
 import sda.pl.HibernateUtil;
-import sda.pl.Product;
-import sda.pl.WarehouseName;
+import sda.pl.domain.Product;
+import sda.pl.domain.WarehouseName;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

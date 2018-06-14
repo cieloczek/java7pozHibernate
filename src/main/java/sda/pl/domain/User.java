@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(exclude = {"orderSet","cartSet","productRatingSet"})
+@EqualsAndHashCode(exclude = {"orderSet","productRatingSet","bannerSet"})
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,18 @@ public class User implements Serializable{
 
     @OneToMany(mappedBy = "user")
     Set<Order> orderSet;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    Set<Cart> cartSet;
+    @OneToOne(mappedBy = "user")
+    Cart cart;
     @OneToMany(mappedBy = "user")
     Set<ProductRating> productRatingSet;
+    @ManyToMany(cascade = CascadeType.ALL)//, fetch = FetchType.EAGER)
+    //join table do laczenia przez tabele dodatkowa
+    @JoinTable(
+            name = "advertisement_for_the_user",
+            joinColumns = @JoinColumn(name = "banner_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    Set<Banner> bannerSet;
 
     @Transient
     BigDecimal totalOrderPrice;
@@ -41,4 +49,19 @@ public class User implements Serializable{
         this.totalOrderPrice = totalOrderPrice;
 
     }
+    public Cart createCart(){
+        Cart cart = new Cart();
+        cart.setUser(this);
+        return cart;
+    }
+    public ProductRating rateProduct(int rate, String descritpion, Product product){
+        ProductRating pr = ProductRating.builder().user(this)
+                .rate(rate)
+                .isActive(false)
+                .description(descritpion)
+                .build();
+        return pr;
+    }
+
+
 }

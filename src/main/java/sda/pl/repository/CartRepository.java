@@ -2,7 +2,6 @@ package sda.pl.repository;
 
 import org.hibernate.Session;
 import sda.pl.HibernateUtil;
-import sda.pl.Product;
 import sda.pl.domain.Cart;
 import java.util.Optional;
 public class CartRepository {

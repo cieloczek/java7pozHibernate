@@ -1,11 +1,10 @@
-package sda.pl;
+package sda.pl.domain;
 
+import com.sun.istack.internal.NotNull;
 import lombok.*;
-import org.hibernate.Session;
-import sda.pl.domain.*;
-import sun.tools.java.AmbiguousMember;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Optional;
@@ -40,7 +39,6 @@ public class Product {
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Stock>stockSet;
 
-
     public void addStock(WarehouseName name, BigDecimal amount){
         if(stockSet==null){
             stockSet = new HashSet<>();
@@ -67,12 +65,6 @@ public class Product {
                 .equals(this))
                 .mapToLong(s->s.getAmount().longValue()).sum();
     }
-    public void addProductRating(ProductRating productRating){
-        if(productRatingSet==null){
-            productRatingSet = new HashSet<>();
-        }
-        productRating.setProduct(this);
-        productRatingSet.add(productRating);
-    }
+
 }
 
