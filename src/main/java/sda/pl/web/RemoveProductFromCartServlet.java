@@ -1,10 +1,6 @@
 package sda.pl.web;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import sda.pl.HibernateUtil;
 import sda.pl.domain.Cart;
-import sda.pl.domain.Price;
 import sda.pl.domain.Product;
 import sda.pl.repository.CartRepository;
 import sda.pl.repository.ProductRepository;
@@ -17,20 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Optional;
 
-@WebServlet(name = "AddProductToCartServlet", urlPatterns = "/cart")
-public class AddProductToCartServlet extends HttpServlet {
-
-    //TODO USERID from session or Cookie
-    public static final Long USER_ID = 1L;
+@WebServlet(name = "RemoveProductFromCartServlet", urlPatterns = "/removeOne")
+public class RemoveProductFromCartServlet extends HttpServlet {
+    final static long USER_ID = 1;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Long productAmmount = Long.parseLong(request.getParameter("productAmmount"));
         Long productId = Long.parseLong(request.getParameter("productId"));
-
-        Optional<Cart>cartByUserId=CartRepository.findCartByUserId(USER_ID);
+        productAmmount = 1L;
+        Optional<Cart> cartByUserId= CartRepository.findCartByUserId(USER_ID);
         Cart cart = new Cart();
         if(cartByUserId.isPresent()){
             cart = cartByUserId.get();
@@ -49,7 +42,7 @@ public class AddProductToCartServlet extends HttpServlet {
 
         Optional<Product> pr = ProductRepository.findProduct(productId);
         if(pr.isPresent()){
-            cart.addProductToCart(pr.get(), productAmmount);
+            cart.removeGivenAmmountOfProductFromCart(productId,productAmmount);
             CartRepository.saveOrUpdateCart(cart);
         }
         PrintWriter writer = response.getWriter();
@@ -58,4 +51,9 @@ public class AddProductToCartServlet extends HttpServlet {
     }
 
 
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
 }

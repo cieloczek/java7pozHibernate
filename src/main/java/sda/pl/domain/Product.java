@@ -27,6 +27,8 @@ public class Product {
     @Enumerated(EnumType.STRING)
     Color color;
     @Enumerated
+    ProductType productType;
+    @Enumerated
     WarehouseName warehouseName;;
     @OneToOne(mappedBy = "product")
     ProductImage productImage;
@@ -62,7 +64,7 @@ public class Product {
                 .stream()
                 .filter(s->!s
                 .getWarehouseName()
-                .equals(this))
+                .equals(WarehouseName.MAIN))
                 .mapToLong(s->s.getAmount().longValue()).sum();
     }
 

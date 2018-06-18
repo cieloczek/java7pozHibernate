@@ -17,6 +17,7 @@ public class OrderRepository {
         try {
             session = HibernateUtil.openSession();
             session.save(order);
+            System.out.println("Order saved");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,6 +52,23 @@ public class OrderRepository {
             String hql = "Select o from Order o JOIN FETCH o.orderDetailsSet od WHERE od.product.name like :productName ";
             Query query = session.createQuery(hql);
             query.setParameter("productName",  productName);
+            return query.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            session.close();
+        }
+    }
+
+    public static List<Order> findAllByUserId(Long user_id) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String hql = "Select o from Order o JOIN FETCH o.orderDetailsSet od WHERE o.user.id = :userID ";
+            Query query = session.createQuery(hql);
+            query.setParameter("userID",  user_id);
             return query.getResultList();
 
         } catch (Exception e) {

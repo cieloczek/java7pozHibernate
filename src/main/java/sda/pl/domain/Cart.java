@@ -1,6 +1,7 @@
 package sda.pl.domain;
 
 import lombok.*;
+import sda.pl.repository.ProductRepository;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,19 +29,16 @@ public class Cart implements Serializable{
     Set<CartDetail> cartDetailSet;
 
     public void addProductToCart(Product product, Long amount){
-        if(cartDetailSet==null){
-            cartDetailSet  = new HashSet<>();
+        if(cartDetailSet == null){
+            cartDetailSet = new HashSet<>();
         }
-        Optional<CartDetail> first = cartDetailSet
-                .stream()
-                .filter(cd ->
-                        cd.getProduct()
-                                .getId()
-                                .equals(product
-                                        .getId()))
-                .findFirst();
+
+        Optional<CartDetail> first = cartDetailSet.stream().filter(cd -> cd.getProduct().getId().equals(product.getId())).findFirst();
         long sum = product.getSumStockForSale();
         if(!first.isPresent()){
+            if(amount>sum){
+                amount=sum;
+            }
             CartDetail newCartDetail = CartDetail.builder()
                     .amount(amount)
                     .price(product.getPrice())
@@ -49,9 +47,12 @@ public class Cart implements Serializable{
                     .build();
             cartDetailSet.add(newCartDetail);
         }else{
+//            first.ifPresent(cd->cd.setAmount(cd.getAmount()+amount));
             CartDetail cd = first.get();
-            if(cd.getAmount()+amount>sum);
-
+            if(cd.getAmount()+amount>sum){
+                amount=sum-cd.getAmount();
+            }
+            cd.setAmount(cd.getAmount()+amount);
         }
     }
     public void substractProductInCart(Product product) {
@@ -115,7 +116,25 @@ public class Cart implements Serializable{
                 order.calculateTotalPrice();
         return order;
        }
-
+    public void removeGivenAmmountOfProductFromCart(Long productId, Long ammount) {
+        if (cartDetailSet != null) {
+            Optional<CartDetail>prodInCart = this.cartDetailSet.stream().filter(e->e.getId().equals(productId)).findFirst();
+            prodInCart.ifPresent(pr->{
+                Long amountInCart = getAmountInCart(productId);
+                if(amountInCart>0){
+                    if(ammount>amountInCart){
+                        pr.setAmount(ammount-amountInCart);
+                    }else{
+                        pr.setAmount(0L);
+                    }
+                }
+                });
+            //TODO a moze by tak rzucał shopexception?
+        }
+    }
+    public Long getAmountInCart(Long productId){
+        return this.cartDetailSet.stream().filter(pr->pr.getId().equals(productId)).findFirst().get().getAmount();
+    }
 
 
 

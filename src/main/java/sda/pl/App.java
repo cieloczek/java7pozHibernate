@@ -9,27 +9,39 @@ import sda.pl.repository.UserRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class App {
 
     public static void main(String[] args) {
+        String[] names = new String[]{"Edward", "Brian", "Harold", "Theo", "Matt"};
+        String[] email = new String[]{"Edward@mail.com", "Brian@mail.com", "Harold@mail.com", "Theo@mail.com", "Matt@mail.com"};
+        String[] pwd = new String[]{"imEdward", "imBrian", "imHarold", "imTheo", "imMatt"};
+//        for (int i = 0; i < names.length; i++) {
+//            User user = User.builder().firstName(names[i]).email(email[i]).password(pwd[i]).build();
+//            UserRepository.saveOrUpdate(user);
+//        }
 //        User user = User.builder().firstName("Harold").email("brian@mail.com").password("imharold").build();
 //        UserRepository.saveOrUpdate(user);
-//        Product maslo = Product.builder()
-//                .name("Masło")
-//                .color(Color.RED)
-//                .price(Price.builder()
-//                        .priceGross(new BigDecimal("4.70"))
-//                        .priceNet(new BigDecimal("4.20"))
-//                        .priceSymbol("PLN")
-//                        .build())
-//                .build();
-//        ProductRepository.saveProduct(maslo);
-//
-//
-//        ProductRepository.findAll().forEach(e -> System.out.println(e.getId() + " " + e.getName()));
-//        ProductRepository.findAllWithPriceNetLessThan(new BigDecimal(4));
-//        System.out.println("Records : " + ProductRepository.countAll());
+        for (int i = 0; i < 20; i++){
+
+
+    Product maslo = Product.builder()
+            .name("Masło")
+            .color(Color.RED)
+            .price(Price.builder()
+                    .priceGross(new BigDecimal ("4.72"))
+                    .priceNet(new BigDecimal("4.20"))
+                    .priceSymbol("PLN")
+                    .build())
+            .build();
+        ProductRepository.saveProduct(maslo);
+}
+
+
+        ProductRepository.findAll().forEach(e -> System.out.println(e.getId() + " " + e.getName()));
+        ProductRepository.findAllWithPriceNetLessThan(new BigDecimal(4));
+        System.out.println("Records : " + ProductRepository.countAll());
 
         Optional<Product> product = ProductRepository.findProduct(3L);
         if (product.isPresent()) {
@@ -72,9 +84,12 @@ public class App {
 //                    e.getOrderDetailsSet()
 //                            .forEach(x->System.out.println(x.getProduct().getName())));
 //        }
-//        OrderRepository.collectAllWithId("Kefir").forEach(e->System.out.println(e.getId()));
-//        UserRepository.findAllWithTotalOrderPrice().forEach(e->System.out.println(e.getEmail() + " " + e.getTotalOrderPrice()));
+        ProductRepository.findProduct(1L).get().addStock(WarehouseName.MAIN,new BigDecimal("30"));
+        ProductRepository.findProduct(2L).get().addStock(WarehouseName.MAIN,new BigDecimal("30"));
+        ProductRepository.findProduct(3L).get().addStock(WarehouseName.MAIN,new BigDecimal("30"));
+        OrderRepository.collectAllWithId("Kefir").forEach(e->System.out.println(e.getId()));
+        UserRepository.findAllWithTotalOrderPrice().forEach(e->System.out.println(e.getEmail() + " " + e.getTotalOrderPrice()));
        ProductRepository.findByNameCriteriaQuery("Maslo") ;
-//    ProductRatingRepository.findAllActiveorWithRatingabove(3L, 3).forEach(System.out::println);
+    ProductRatingRepository.findAllActiveorWithRatingabove(3L, 3).forEach(System.out::println);
     }
 }

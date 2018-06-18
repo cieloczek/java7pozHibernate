@@ -22,23 +22,18 @@ public class HelloWorldServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String firstName = request.getParameter("firstName");
         PrintWriter writer = response.getWriter();
-        List<Product> all = new ArrayList<Product>();
-
-        all.add(Product.builder().name("Masło")
-                .price(Price.builder().priceGross(new BigDecimal(21)).build()).build());
+        List<Product> all = ProductRepository.findAll();
 
         writer.write("<html><head></head><body><h1>Helo world!"+firstName+" </h1>" +
                 "<table style = \"width:60%\" border=2px>" +
                 "<tr><th>Nazwa</th>" +
                 "<th>Id</th>" +
-                "<th>Cena</th></tr>");
+                "<th>Cena Netto</th>"+
+                "<th>Cena Brutto</th></tr>");
 
         for(Product p : all) {
-            writer.write("<tr><td>"+p.getName()+"</th><td></td><td>"+p.getPrice()+"</td></tr></table>");
+            writer.write("<tr><td>"+p.getName()+"</td><td>"+p.getId()+"</td><td>"+p.getPrice().getPriceNet()+"</td><td>"+p.getPrice().getPriceGross()+"</td></tr>");
         }
-        writer.write( "</body></html>");
-
-
-
+        writer.write( "</table></body></html>");
     }
 }

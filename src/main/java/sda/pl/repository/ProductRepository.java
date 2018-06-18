@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 import sda.pl.domain.Color;
 import sda.pl.HibernateUtil;
 import sda.pl.domain.Product;
+import sda.pl.domain.ProductType;
 import sda.pl.domain.WarehouseName;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -171,6 +172,24 @@ public class ProductRepository {
                 session.getTransaction().rollback();
             }
             return false;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    public static List<Product> findAllByCategory(ProductType productType) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String hql = "SELECT p FROM Product p where p.productType= :type";
+            Query query = session.createQuery(hql);
+            query.setParameter("type", productType);
+            List resultList = query.getResultList();
+            return resultList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
         } finally {
             if (session != null) {
                 session.close();
