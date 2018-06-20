@@ -6,25 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="header.jsp"%>
-<html>
-
-<body>
-<div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+        <a href="#"><img class="card-img-top" src="/productImage?productId=${product.id}" onerror="http:'//placehold.it/700x400'" width="200" height="150"></a>
         <div class="card-body">
             <h4 class="card-title">
-                <a href="Prod.jsp?productId=${product.id}">${product.name}</a>
+                <a href="#">${product.name}</a>
             </h4>
-            <h5>${product.price}</h5>
+            <h5>${product.price.priceNet}</h5>
             <p class="card-text">${product.color}</p>
         </div>
         <div class="card-footer">
-            <small class="text-muted">
-                &#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            <a href="/productAdminPage.jsp?productId=${product.id}" class="btn"> Edit</a>
         </div>
     </div>
-</div>
-</body>
-</html>
+

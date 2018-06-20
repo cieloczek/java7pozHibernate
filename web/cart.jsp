@@ -53,7 +53,7 @@
         <td>${cd.amount}</td>
         <td>${cd.price.priceNet}</td>
         <td>${cd.price.priceGross}</td>
-        <td> <button type="submit" href="/removeOne?productId=${cd.id}"/>Usuń</td>
+        <td><a type="btn" href="/removeOne?productId=${cd.id}"/>Usuń</td>
     </tr>
     </c:forEach>
     </tbody>
@@ -62,7 +62,7 @@
 </table>
     <div>
     </div>
-    <a href="/createOrder" class="btn-success" value="Zakończ i zapać"/>
+        <a type="btn" href="/createOrder" class="btn-success" value="Zakończ i zapać">Button</a>
     </div>
 </div>
 </div>

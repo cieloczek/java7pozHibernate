@@ -36,7 +36,7 @@ public class Order implements Serializable {
     @Transient
     BigDecimal vat;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<OrderDetails> orderDetailsSet;
 
     public void addOrderDetail(OrderDetails orderDetails){

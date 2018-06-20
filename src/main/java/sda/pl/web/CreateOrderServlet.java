@@ -30,6 +30,8 @@ public class CreateOrderServlet extends HttpServlet {
         CartRepository.deleteCart(cartByUserId);
 
         response.getWriter().write("Złożono zamówienie");
+        response.sendRedirect("http://localhost:8080");
+
     }
     }
 }

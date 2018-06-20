@@ -122,8 +122,8 @@ public class Cart implements Serializable{
             prodInCart.ifPresent(pr->{
                 Long amountInCart = getAmountInCart(productId);
                 if(amountInCart>0){
-                    if(ammount>amountInCart){
-                        pr.setAmount(ammount-amountInCart);
+                    if(ammount<amountInCart){
+                        pr.setAmount(amountInCart-ammount);
                     }else{
                         pr.setAmount(0L);
                     }

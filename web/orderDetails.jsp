@@ -1,7 +1,9 @@
 <%@ page import="sda.pl.repository.OrderRepository" %>
 <%@ page import="sda.pl.domain.Order" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="sda.pl.domain.OrderDetails" %>
+<%@ page import="java.util.Set" %><%--
   Created by IntelliJ IDEA.
   User: mateusz
   Date: 15.06.2018
@@ -9,9 +11,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
+    Long orderId =Long.valueOf(request.getParameter("orderId"));
     //TODO ZROBIC SZCZEGOLY ZAMOWIENIA
     Long USER_ID = 1L;
-    List<Order> ordersByUser = OrderRepository.findAllByUserId(USER_ID);
+    Optional<Order> ordersByUser = OrderRepository.findById(orderId);
+    if (ordersByUser.isPresent()) {
+        pageContext.setAttribute("order", ordersByUser.get());
+    } else {
+
+        //should Be Error
+    }
         pageContext.setAttribute("ordersByUser", ordersByUser);
 %>
 <html>
@@ -35,21 +44,21 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Id</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Cena Netto</th>
-                    <th scope="col">Cena Brutto</th>
-                    <th scope="col">Usuń</th>
+                    <th scope="col">Produkt</th>
+                    <th scope="col">Ilość</th>
+                    <th scope="col">Cena Brutto szt</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${ordersByUser}" var="order" >
+                <c:forEach items="${order.orderDetailsSet}" var="ods">
                     <tr>
                         <th scope="row">1</th>
-                        <td>${order.id}</td>
-                        <td>${order.date}</td>
-                        <td>${order.totalPrice.priceNet}</td>
-                        <td>${order.totalPrice.priceGross}</td>
-                        <td>Usuń</td>
+                        <td>${ods.id}</td>
+                        <td>${ods.product.name}</td>
+                        <td>${ods.amount}</td>
+                        <td>${ods.product.price.priceGross}</td>
+                        <%--<td>${ods.amount*ods.price}</td>--%>
+
                     </tr>
                 </c:forEach>
                 </tbody>

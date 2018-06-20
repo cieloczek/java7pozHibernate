@@ -1,5 +1,5 @@
 package sda.pl.domain;
 
 public enum ProductType {
-    MASŁO, MLEKO, KEFIR, PIECZYWO
+    MASLO, MLEKO, KEFIR, CHLEB, MAJONEZ
 }

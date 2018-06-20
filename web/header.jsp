@@ -6,8 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
+<%--<%--%>
+    <%--String phrase = request.getParameter("phrase");--%>
+    <%--if(phrase==null){--%>
+        <%--phrase="";--%>
+    <%--}--%>
+<%--%>--%>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,7 +30,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">Masło maslo masło</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <form method="get" action="productSearch.jsp">
+            <input name="phrase" id="phrase" value="Product name" type="text" >
+            <button type="submit">Szukaj</button>
+            </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -43,14 +52,9 @@
                         <a class="nav-link" href="Order.jsp">Zamowienia</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a href="productAdminPage.jsp" class="nav-link" href="#">Panel Admina</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-</head>
-
-
-</html>

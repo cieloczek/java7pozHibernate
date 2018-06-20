@@ -11,15 +11,13 @@
     ProductType[] values = ProductType.values();
     pageContext.setAttribute("categories", values);
 %>
-<html>
 <div class="col-lg-3">
 
     <h1 class="my-4">Shop Name</h1>
     <div class="list-group">
         <c:forEach var="category" items="${categories}">
-        <a href="]productCategory.jsp?category=${category}" class="list-group-item">${category}</a>
+        <a href="productCategory.jsp?category=${category}" class="list-group-item">${category}</a>
         </c:forEach>
     </div>
 
 </div>
-</html>

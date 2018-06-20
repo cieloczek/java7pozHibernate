@@ -34,6 +34,7 @@ public class App {
                     .priceNet(new BigDecimal("4.20"))
                     .priceSymbol("PLN")
                     .build())
+            .productType(ProductType.MASLO)
             .build();
         ProductRepository.saveProduct(maslo);
 }
@@ -47,6 +48,7 @@ public class App {
         if (product.isPresent()) {
             Product product2 = product.get();
             product2.setName("Kefir");
+            product2.setProductType(ProductType.KEFIR);
             product2.setPrice(Price.builder()
                     .priceNet(new BigDecimal("1.2"))
                     .priceGross(new BigDecimal("1.8"))
@@ -84,9 +86,6 @@ public class App {
 //                    e.getOrderDetailsSet()
 //                            .forEach(x->System.out.println(x.getProduct().getName())));
 //        }
-        ProductRepository.findProduct(1L).get().addStock(WarehouseName.MAIN,new BigDecimal("30"));
-        ProductRepository.findProduct(2L).get().addStock(WarehouseName.MAIN,new BigDecimal("30"));
-        ProductRepository.findProduct(3L).get().addStock(WarehouseName.MAIN,new BigDecimal("30"));
         OrderRepository.collectAllWithId("Kefir").forEach(e->System.out.println(e.getId()));
         UserRepository.findAllWithTotalOrderPrice().forEach(e->System.out.println(e.getEmail() + " " + e.getTotalOrderPrice()));
        ProductRepository.findByNameCriteriaQuery("Maslo") ;

@@ -42,7 +42,8 @@
                         <td>${order.id}</td>
                         <td>${order.date}</td>
                         <td>${order.totalPrice.priceGross}</td>
-                        <td><a class="btn" href="orderDetails.jsp">Szczegoly zamowienia</a>  </td>
+                        <td><a class="btn" href="orderDetails.jsp?orderId=${order.id}">Szczegoly zamowienia</a>  </td>
+
                     </tr>
                 </c:forEach>
                 </tbody>

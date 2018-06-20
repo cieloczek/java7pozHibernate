@@ -18,9 +18,10 @@ import java.util.Optional;
 @WebServlet(name = "RemoveProductFromCartServlet", urlPatterns = "/removeOne")
 public class RemoveProductFromCartServlet extends HttpServlet {
     final static long USER_ID = 1;
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Long productAmmount = Long.parseLong(request.getParameter("productAmmount"));
+        Long productAmmount; // Long.parseLong(request.getParameter("productAmmount"));
         Long productId = Long.parseLong(request.getParameter("productId"));
         productAmmount = 1L;
         Optional<Cart> cartByUserId= CartRepository.findCartByUserId(USER_ID);
@@ -53,7 +54,6 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 
 
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+//
+//    }
 }

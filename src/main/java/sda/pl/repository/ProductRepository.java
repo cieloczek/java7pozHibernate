@@ -138,10 +138,10 @@ public class ProductRepository {
                 Root<Product> from =query.from(Product.class);
                 query.select(from);
                 Predicate whereName = cb.like(from.get("name"), "%"+name+"%");
-                Predicate whereColor = cb.equal(from.get("color"), Color.WHITE);
+//                Predicate whereColor = cb.equal(from.get("color"), Color.WHITE);
 
-                Predicate whereNameAndColor = cb.and(whereColor,whereName);
-                query.where(whereNameAndColor);
+//                Predicate whereNameAndColor = cb.and(whereColor,whereName);
+                query.where(whereName);
 
                 return session.createQuery(query).getResultList();
             } catch (Exception e) {
